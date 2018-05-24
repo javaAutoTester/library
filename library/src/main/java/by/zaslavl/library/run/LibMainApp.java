@@ -7,6 +7,7 @@ import by.zaslavl.library.entity.Book;
 import by.zaslavl.library.entity.Genre;
 import by.zaslavl.library.entity.Library;
 import by.zaslavl.library.logic.AuthorList;
+import by.zaslavl.library.logic.BookList;
 import by.zaslavl.library.logic.FindService;
 import by.zaslavl.library.logic.Librarian;
 import by.zaslavl.library.logic.LibraryItem;
@@ -52,6 +53,15 @@ public class LibMainApp {
 		List<LibraryItem> list = authlist.createList(lib1);
 		//печатаем список авторов
 		authlist.printList(list);
-        
+		System.out.println("===========================");
+		
+		//интерфейсы не позволяют делать статические методы, поэтому создаем экземпляр класса
+		BookList blist = new BookList();
+		//формируем список всех книг, имеющихся в библиотеке и печатаем его
+        blist.printList( blist.createList(lib1) );
+        System.out.println("===========================");
+        //создаем список книг, в фамилиях авторов которых встречается последователность символов "кУр"
+        //и печатаем его
+        blist.printList( blist.createList(lib1, "кУр") );
 	}
 }
