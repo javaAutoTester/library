@@ -5,6 +5,7 @@ import java.util.List;
 import by.zaslavl.library.entity.Library;
 
 public interface ListManager {
-	List<LibraryList> createList(Library library);
-	void printList(List<LibraryList> list);
+	List<LibraryItem> createList(Library library);
+	List<LibraryItem> createList(Library library, String s);
+	void printList(List<LibraryItem> list);
 }

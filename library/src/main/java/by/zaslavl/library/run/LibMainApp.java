@@ -9,7 +9,7 @@ import by.zaslavl.library.entity.Library;
 import by.zaslavl.library.logic.AuthorList;
 import by.zaslavl.library.logic.FindService;
 import by.zaslavl.library.logic.Librarian;
-import by.zaslavl.library.logic.LibraryList;
+import by.zaslavl.library.logic.LibraryItem;
 import by.zaslavl.library.logic.PrintService;
 
 public class LibMainApp {
@@ -49,7 +49,7 @@ public class LibMainApp {
 		//интерфейсы не позволяют делать статические методы, поэтому создаем экземпляр класса
 		AuthorList authlist =new AuthorList();
 		//формируем список авторов, книги которых имеются в библиотеке
-		List<LibraryList> list = authlist.createList(lib1);
+		List<LibraryItem> list = authlist.createList(lib1);
 		//печатаем список авторов
 		authlist.printList(list);
         

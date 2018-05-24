@@ -8,14 +8,17 @@ import by.zaslavl.library.entity.Book;
 import by.zaslavl.library.entity.Library;
 
 public class AuthorList implements ListManager{
-
-	public List<LibraryList> createList(Library library) {
-		List<LibraryList> authorlist = new LinkedList<LibraryList>();
+	
+/**
+ * Данный метод создает список авторов, книги которых есть в библиотеке
+ */
+	public List<LibraryItem> createList(Library library) {
+		List<LibraryItem> authorlist = new LinkedList<LibraryItem>();
 		Book[] lib = library.getLibrary();
 		for (int i = 0; i < lib.length && lib[i] != null; i++) {
 			for (int j = 0; j < lib[i].getAuthors().length; j++) {
 				try {
-					authorlist.add((LibraryList) lib[i].getAuthors()[j].clone());
+					authorlist.add((LibraryItem) lib[i].getAuthors()[j].clone());
 				} catch (CloneNotSupportedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -23,7 +26,7 @@ public class AuthorList implements ListManager{
 			}
 		}
 		for (int i = 0; i < authorlist.size(); i++) {
-			LibraryList a = authorlist.get(i);
+			LibraryItem a = authorlist.get(i);
 			for (int j = i + 1; j < authorlist.size(); j++) {
 				if (a.equals(authorlist.get(j))) {
 					authorlist.remove(j);
@@ -33,8 +36,20 @@ public class AuthorList implements ListManager{
 
 		return authorlist;
 	}
+	
+	/**
+	 * Данный метод пока ничего не создает
+	 */
+	
+	public List<LibraryItem> createList(Library library, String s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	public void printList(List<LibraryList> list) {
+	/**
+	 * Этот метод печатает список авторов, переданный в качестве параметра
+	 */
+	public void printList(List<LibraryItem> list) {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(
 					"№" + (i + 1) + "  " + ((Author) list.get(i)).getName()[2] + "  " + ((Author) list.get(i)).getName()[0] + "  "
@@ -42,5 +57,7 @@ public class AuthorList implements ListManager{
 		}
 		
 	}
+
+	
 
 }

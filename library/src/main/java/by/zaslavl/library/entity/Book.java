@@ -3,9 +3,9 @@ package by.zaslavl.library.entity;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import by.zaslavl.library.logic.LibraryList;
+import by.zaslavl.library.logic.LibraryItem;
 
-public class Book implements Cloneable, Serializable, LibraryList{
+public class Book implements Cloneable, Serializable, LibraryItem{
 	private String title;
 	private Author[] authors;
 	private int year;
