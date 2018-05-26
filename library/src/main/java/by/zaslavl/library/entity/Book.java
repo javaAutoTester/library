@@ -15,12 +15,14 @@ public class Book implements Cloneable, Serializable, LibraryItem{
 	}
 	public Book(String title, int year, Genre genre) {
 		super();
+		if(title == null || title.equals("")) {
+			throw new IllegalArgumentException("Book title must be not null, empty or whitespace only!");
+		}
 		this.title = title;
 		this.authors = null;
 		this.year = year;
 		this.genre = genre;
 	}
-	
 	
 	public void addAuthorToBook(Author author) {
 		if(this.authors == null) {this.authors = new Author[1]; authors[0]=author;
