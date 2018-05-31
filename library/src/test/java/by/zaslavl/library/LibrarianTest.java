@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import by.zaslavl.library.entity.Author;
 import by.zaslavl.library.entity.Book;
 import by.zaslavl.library.entity.Genre;
 import by.zaslavl.library.entity.Library;
@@ -24,7 +25,7 @@ public class LibrarianTest {
 	/**
 	 * Method createNewBook must return not null object type Book
 	 * Field "title" must throw IllegalArgumentExeption when entered:  null, empty field, whitespace only.
-	 * Field "year"  excepts values from 1900 to 3000. Other ways it throws IllegalArgumentExeption  
+	 * Field "year"  excepts values from 1 to 9999. Other ways it throws IllegalArgumentExeption  
 	 */
 	
 	@Test
@@ -37,32 +38,49 @@ public class LibrarianTest {
 	 * title must be not null
 	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateNewBook_Title_null() {
+	public void book_title_null() {
 	    Librarian.createNewBook(null, 2000, Genre.PROSE);
 	}
 	
 	/**
-	 * title must be not empty
+	 * title must be valid
 	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateNewBook_Title_empty() {
-	   Librarian.createNewBook("", 2000, Genre.PROSE);
+	public void book_title_valide() {
+	   Librarian.createNewBook("  &*%$#@", 2000, Genre.PROSE);
 	}
 	
-    /**
-     * title can not consist whitespace only
-     */
+	/**
+	 * year must be valid
+	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateNewBook_Title_space() {
-	    Librarian.createNewBook("    ", 2000, Genre.PROSE);
+	public void book_year_valide() {
+	   Librarian.createNewBook("You!", -3, Genre.PROSE);
 	}
 	
 	
-@Ignore
 	@Test
 	public void testAddAuthorToBook() {
-		fail("Not yet implemented");
+	Book b = Librarian.createNewBook("You!", 2000, Genre.PROSE);
+	Librarian.addAuthorToBook(b, "Андрей","Андреевич", "Андреев", 2010);
+	String[] auth_name = b.getAuthors()[0].getName();
+	assertTrue(auth_name[0].equals("Андрей") && auth_name[1].equals("Андреевич")&& auth_name[2].equals("Андреев")
+			   && b.getAuthors()[0].getBirth_year()==2010);
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void author_name_valide() {
+	Book b = Librarian.createNewBook("You!", 2000, Genre.PROSE);
+	Librarian.addAuthorToBook(b, "00000","   ", "!!!!!!!", 2010);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void author_birth_year_valide() {
+	Book b = Librarian.createNewBook("You!", 2000, Genre.PROSE);
+	Librarian.addAuthorToBook(b, "Андрей","Андреевич", "Андреев", -1);
+	}
+	
+	
 @Ignore
 	@Test
 	public void testAddBookToLibrary() {

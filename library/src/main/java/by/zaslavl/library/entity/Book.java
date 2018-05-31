@@ -15,8 +15,14 @@ public class Book implements Cloneable, Serializable, LibraryItem{
 	}
 	public Book(String title, int year, Genre genre) {
 		super();
-		if(title == null || title.equals("")) {
-			throw new IllegalArgumentException("Book title must be not null, empty or whitespace only!");
+		if(title == null) {
+			throw new IllegalArgumentException("Book title must be not null.");
+		}
+		if(InputValidation.bookTitleValidation(title)==false) {
+			throw new IllegalArgumentException("This title is not acceptable.");
+		}
+		if(InputValidation.yearValidation(year)==false) {
+			throw new IllegalArgumentException("This year has not acceptable value.");
 		}
 		this.title = title;
 		this.authors = null;

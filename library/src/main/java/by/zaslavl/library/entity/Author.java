@@ -9,8 +9,19 @@ public class Author implements Cloneable, Serializable, LibraryItem{
 	private String[] name; 
 	private int birth_year;
 	public Author (String[] name, int birth_year) {
+		for (int i = 0; i < name.length; i++) {
+			if(name[i]==null) {
+				throw new IllegalArgumentException("Name must be not null.");
+			}
+			if(InputValidation.nameValidation(name[i])==false) {
+				throw new IllegalArgumentException("This name is not acceptable.");
+			}
+		}
 		this.name= name;
-		this.birth_year = birth_year;
+		if(InputValidation.yearValidation(birth_year)==false) {
+			throw new IllegalArgumentException("This year has not acceptable value.");
+		}else { this.birth_year = birth_year;}
+		
 	}
 	public String[] getName() {
 		return name;
